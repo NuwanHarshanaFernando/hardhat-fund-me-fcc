@@ -48,4 +48,6 @@ yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
 In package.json, we can see the package is overridden
 "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
 
+To refactor like Aave, create helper-hardhat-config.js file
+Define network configs in this file
 
