@@ -24,10 +24,10 @@ const { network } = require("hardhat")
 //     hre.deployments
 // }
 
-const {networkConfig} = require("../helper-hardhat-config")
+const {networkConfig, developmentChains} = require("../helper-hardhat-config")
 
 module.exports = async ({ getNamedAccounts, deployments }) => { 
-    const { deploy, log } = deployments
+    const { deploy, log, get } = deployments
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 
@@ -38,7 +38,15 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     // if chainId is Z, use address A
     // Like in Aave-v3-core -> They used 'helper-hardhat-config'
 
-    const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+   // const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+    let ethUsdPriceFeedAddress
+    if (developmentChains.includes(network.name)){
+        const ethUsdAggregator = await deployments.get("MockV3Aggregator")
+        ethUsdPriceFeedAddress = ethUsdAggregator.address
+    }else{
+        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+    }
+
 
     // Mock
     // If the contract doesn't exist, we deploy a minimal version of it
@@ -51,10 +59,14 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log("Deploying FundMe and waiting for confirmations...")
     const fundMe = await deploy("FundMe", {
         from: deployer,
-        args: [], // constructor arguments, put price feed address
+        args: [ethUsdPriceFeedAddress], // constructor arguments, put price feed address
         log: true,
         waitConfirmations: 1, // wait for 1 block confirmation
     })
     log(`FundMe deployed at ${fundMe.address}`)
-}    
+    log("-------------------------------------------------------------------")
+  
+}   
+
+module.exports.tags = ["all", "fundme"]
 

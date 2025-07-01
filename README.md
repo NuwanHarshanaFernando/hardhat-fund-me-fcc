@@ -69,4 +69,9 @@ Define constructor parameters of Mock inside helper-hardhat-config file
 const DECIMALS = 8
 const INITIAL_ANSWER = 200000000000 // 2000 and 8 decimal points
 
+Deploy mock only
+
+```
+yarn hardhat deploy --tags mocks
+```
 
