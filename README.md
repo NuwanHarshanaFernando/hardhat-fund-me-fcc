@@ -75,3 +75,18 @@ Deploy mock only
 yarn hardhat deploy --tags mocks
 ```
 
+Deploy now 
+
+```
+yarn hardhat deploy
+```
+
+Again run this command
+
+```
+yarn hardhat node
+```
+Now we can see deployments also....
+
+For Verification create 'utils' folder and create 'verify.js' inside it
+
