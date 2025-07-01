@@ -40,6 +40,14 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
     const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
 
+    // Mock
+    // If the contract doesn't exist, we deploy a minimal version of it
+    // for our local testing
+    // Deploy mocks is technically deploy script,
+    // Therefore create a new file called "00-deploy-mocks.js"
+    // 00 means it's pre-deployed, we only do it sometimes, 
+    // Only for local testnets.
+
     log("Deploying FundMe and waiting for confirmations...")
     const fundMe = await deploy("FundMe", {
         from: deployer,

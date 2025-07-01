@@ -51,3 +51,22 @@ In package.json, we can see the package is overridden
 To refactor like Aave, create helper-hardhat-config.js file
 Define network configs in this file
 
+For mock, create a folder called 'test' inside contracts folder.
+
+After creating the MockV3Aggregator inside 'test' folder, compile
+
+```
+yarn hardhat compile
+
+```
+
+Then check artifacts, Now we can see the files inside @chainlink/contracts folder
+
+Define developmentChains indide helper-hardhat-config.js
+
+Define constructor parameters of Mock inside helper-hardhat-config file
+
+const DECIMALS = 8
+const INITIAL_ANSWER = 200000000000 // 2000 and 8 decimal points
+
+
