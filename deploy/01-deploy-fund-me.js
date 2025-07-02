@@ -64,7 +64,8 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         from: deployer,
         args: args, // constructor arguments, put price feed address
         log: true,
-        waitConfirmations: 1, // wait for 1 block confirmation
+       // waitConfirmations: 1, // wait for 1 block confirmation
+       waitConfirmations: network.config.blockConfirmations || 1
     })
 
     //Verification for live blockchains

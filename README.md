@@ -90,3 +90,8 @@ Now we can see deployments also....
 
 For Verification create 'utils' folder and create 'verify.js' inside it
 
+Now deploy
+
+```
+yarn hardhat deploy --network sepolia --tags fundme
+```
